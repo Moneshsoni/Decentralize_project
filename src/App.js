@@ -30,11 +30,11 @@ function App() {
         setAccount(address);
         let contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
         const contract = new ethers.Contract(contractAddress,Upload.abi,signer);
-        console.log("Contract",contract);
+        // console.log("Contract",contract);
         setContract(contract);
         setProvider(provider);
     }else{
-      console.log("Metamask is not Installed");
+      alert("Metamask is not Installed");
     } 
     }
 
@@ -46,12 +46,13 @@ function App() {
       <div class = "bg"></div>
       <div class = "bg bg2"></div>
       <div class = "bg bg3"></div>
-
+      <h1>Welcome to Decentralize File storage systems</h1>
       <p>Account : {account ? account:"Not connected"}</p>
-      
+      <FileUpload account={account} provider={provider} contract={contract}></FileUpload>
 
     </div>
   );
 }
 
 export default App;
+ 
