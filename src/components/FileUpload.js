@@ -25,7 +25,7 @@ const FileUpload = ({contract,account,provider})=>{
                     },
                   });
                   const ImgHash = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
-                  await contract.add(account,ImgHash);
+                  contract.add(account,ImgHash);
                   alert("Successfully Image Uploaded");
                   setFileName("No image selected");
                   setFile(null);
@@ -41,7 +41,7 @@ const FileUpload = ({contract,account,provider})=>{
 
     const retrieveFile = (e)=>{
         const data = e.target.files[0];//files array of files object
-        console.log("",data);
+        // console.log("",data);
 
         const reader = new window.FileReader();
         reader.readAsArrayBuffer(data);
@@ -60,7 +60,7 @@ const FileUpload = ({contract,account,provider})=>{
             </label>
             <input disabled={!account} type="file" id="file-upload" name="data" onChange={retrieveFile}/>
             <span ckassName="textArea">Image:{fileName}</span>
-            <button type="submit" className="upload">Upload Files</button>
+            <button type="submit" className="upload" disabled={!file}>Upload Files</button>
         </form> 
     </div>
     
