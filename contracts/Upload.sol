@@ -52,7 +52,4 @@ contract Upload{
     function shareAccess()public view returns(Access[] memory){
         return  accessList[msg.sender];
     }
-
-
-
 }
