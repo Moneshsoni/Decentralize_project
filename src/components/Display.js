@@ -1,20 +1,18 @@
+ 
+
 import { useState } from "react";
 import "./Display.css";
 const Display = ({ contract, account }) => {
   const [data, setData] = useState("");
   const getdata = async () => {
     let dataArray;
-    let Otheraddress = document.querySelector(".address").value;
-    
-    console.log("Fatch data or not",Otheraddress);
-    console.log("This is working fine");
-
+    const Otheraddress = document.querySelector(".address").value;
     try {
       if (Otheraddress) {
-          dataArray = await contract.display(Otheraddress);
-          console.log(dataArray);
+        dataArray = await contract.display(Otheraddress);
+        // console.log(dataArray);
       } else {
-          dataArray = await contract.display(account);
+        dataArray = await contract.display(account);
       }
     } catch (e) {
       alert("You don't have access");
@@ -31,10 +29,10 @@ const Display = ({ contract, account }) => {
           <a href={item} key={i} target="_blank">
             <img
               key={i}
-              src={`https://gateway.pinata.cloud/ipfs/${item.substring(6)}`}
+              src={item}
               alt="new"
               className="image-list"
-            ></img>
+            />
           </a>
         );
       });
