@@ -15,7 +15,7 @@ const Display = ({ contract, account }) => {
         dataArray = await contract.display(account);
       }
     } catch (e) {
-      alert("You don't have access");
+      alert("You don't have access",e);
     }
     const isEmpty = Object.keys(dataArray).length === 0;
 
