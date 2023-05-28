@@ -10,13 +10,12 @@ function App() {
   const [account,setAccount] = useState("");
   const [contract,setContract]=useState(null);
   const [provider,setProvider] = useState(null);
-  const [modelOpen,setModalOpen] = useState(false);
+  const [modelOpen,setModalOpen ] = useState(false);
 
   useEffect(()=>{
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const loadProvider = async()=>{
       if(provider){
-
         window.ethereum.on("chainChanged",()=>{
           window.location.reload();
         });
@@ -28,7 +27,7 @@ function App() {
         const signer = provider.getSigner();
         const address = await signer.getAddress();
         setAccount(address);
-        let contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+        let contractAddress = "0x09E90b4d63D3E5d1cEd2cD072699Bf2E2d1391e4";
         const contract = new ethers.Contract(contractAddress,Upload.abi,signer);
         // console.log("Contract",contract);
         setContract(contract);
@@ -41,16 +40,22 @@ function App() {
     provider && loadProvider()
   })
   return (
+    <>
+    {!modelOpen && (<button className="share" onClick={()=> setModalOpen(true)}>Share</button>)} {""}
+    
+    {modelOpen &&(<Modal setModalOpen={setModalOpen} contract = {contract} ></Modal>)}
     <div className="App">
       <h1 style={{ color: "white" }}>Mdrive WEB3.0</h1>
+      <h1 style={{ color: "blue" }}>Welcome to Decentralize File storage systems</h1>
       <div class = "bg"></div>
       <div class = "bg bg2"></div>
       <div class = "bg bg3"></div>
-      <h1>Welcome to Decentralize File storage systems</h1>
+      
       <p>Account : {account ? account:"Not connected"}</p>
       <FileUpload account={account} provider={provider} contract={contract}></FileUpload>
-
+      <Display contract={contract} account={account}></Display>
     </div>
+    </>
   );
 }
 
